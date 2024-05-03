@@ -1,1 +1,1 @@
-Joc Cameroon cu interfata grafica simpla
+Joc Cameroon cu interfata grafica simpla.
