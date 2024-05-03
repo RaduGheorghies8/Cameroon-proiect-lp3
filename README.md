@@ -1,1 +1,1 @@
-# Proiect_Radu
+Joc Cameroon cu interfata grafica simpla
