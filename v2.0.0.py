@@ -1,6 +1,7 @@
 import random
 import tkinter as tk
 from tkinter import messagebox
+
 def aruncare_zaruri():
     return [random.randint(1, 6) for _ in range(6)]
 
@@ -38,36 +39,9 @@ def calculeaza_punctaj(zaruri, formatie):
             return 36
         return 0
 
-def main():
-    nume_jucator = input("Introduceți numele jucatorului: ")
-    formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suita", "care", "cameron"]
-    formatii_realizate = []
-    punctaj_total = 0
-
-    for _ in range(15):
-        input("Apasați ENTER pentru a arunca zarurile...")
-        zaruri = aruncare_zaruri()
-        print("Zarurile aruncate sunt:", zaruri)
-        formatie_aleasa = input("Alegeți o formație disponibila sau renunțați (scrieți 'renunță'): ").lower()
-        if formatie_aleasa == "renunță":
-            print("Ați renunțat la această formație.")
-            punctaj_total -= 3
-        elif formatie_aleasa in formatii_disponibile:
-            punctaj_formatie = calculeaza_punctaj(zaruri, formatie_aleasa)
-            print(f"Punctajul pentru formația {formatie_aleasa} este: {punctaj_formatie}")
-            punctaj_total += punctaj_formatie
-            formatii_realizate.append(formatie_aleasa)
-            formatii_disponibile.remove(formatie_aleasa)
-        else:
-            print("Formație invalidă!")
-    if len(formatii_realizate) == 15:
-        punctaj_total += 20
-        print("Felicitări, ați completat toate formațiile și ați primit un bonus de 20 de puncte!")
-
-    print("Jocul s-a încheiat. Punctaj total:", punctaj_total)
-
 def arunca_zaruri_si_calculeaza():
     global punctaj_total
+    global formatii_realizate
     zaruri = aruncare_zaruri()
     messagebox.showinfo("Zaruri aruncate", f"Zarurile aruncate sunt: {zaruri}")
     formatie_aleasa = input_box.get().lower()
@@ -87,34 +61,61 @@ def arunca_zaruri_si_calculeaza():
         punctaj_total += 20
         messagebox.showinfo("Felicitări!", "Ați completat toate formațiile și ați primit un bonus de 20 de puncte!")
     punctaj_label.config(text=f"Punctaj total: {punctaj_total}")
+    formatii_label.config(text=f"Formații realizate: {', '.join(formatii_realizate)}")
 
 def start_game():
     global punctaj_total
     global formatii_realizate
     global formatii_disponibile
+    global input_box
+    global punctaj_label
+    global formatii_label
+
     punctaj_total = 0
     formatii_realizate = []
     formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suită", "caré", "cameron"]
 
     root = tk.Tk()
-    root.title("Joc cu zaruri")
+    root.title("Cameroon")
 
-    input_frame = tk.Frame(root)
+    # Stilizare și configurare
+    root.geometry("500x400")
+    root.configure(bg="#fff176")  # Fundal galben
+
+    # Stiluri
+    title_font = ("Helvetica", 18, "bold")
+    label_font = ("Helvetica", 12)
+    button_font = ("Helvetica", 12, "bold")
+
+    # Culori
+    title_color = "#283593"
+    bg_color = "#fff176"  # Fundal galben
+    input_bg_color = "#fff9c4"
+    button_bg_color = "#f57f17"
+    button_fg_color = "white"
+    label_bg_color = bg_color
+
+    title_label = tk.Label(root, text="Cameroon", font=title_font, fg=title_color, bg=bg_color)
+    title_label.pack(pady=20)
+
+    input_frame = tk.Frame(root, bg=bg_color)
     input_frame.pack(pady=10)
 
-    input_label = tk.Label(input_frame, text="Alegeți o formă disponibilă sau renunțați:")
-    input_label.pack(side=tk.LEFT)
+    input_label = tk.Label(input_frame, text="Alegeți o formă disponibilă sau renunțați:", font=label_font, bg=label_bg_color)
+    input_label.pack(side=tk.LEFT, padx=5)
 
-    global input_box
-    input_box = tk.Entry(input_frame)
+    input_box = tk.Entry(input_frame, bg=input_bg_color)
     input_box.pack(side=tk.LEFT)
 
-    arunca_button = tk.Button(root, text="Aruncă zarurile și calculează", command=arunca_zaruri_si_calculeaza)
-    arunca_button.pack(pady=5)
+    arunca_button = tk.Button(root, text="Aruncă zarurile și calculează", command=arunca_zaruri_si_calculeaza, bg=button_bg_color, fg=button_fg_color, font=button_font)
+    arunca_button.pack(pady=10)
 
-    global punctaj_label
-    punctaj_label = tk.Label(root, text=f"Punctaj total: {punctaj_total}")
-    punctaj_label.pack()
+    punctaj_label = tk.Label(root, text=f"Punctaj total: {punctaj_total}", font=label_font, bg=label_bg_color)
+    punctaj_label.pack(pady=5)
+
+    formatii_label = tk.Label(root, text="Formații realizate: ", font=label_font, bg=label_bg_color)
+    formatii_label.pack(pady=5)
+
     root.mainloop()
 
 if __name__ == "__main__":
