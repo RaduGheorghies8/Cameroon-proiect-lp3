@@ -73,7 +73,7 @@ def start_game():
 
     punctaj_total = 0
     formatii_realizate = []
-    formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suită", "caré", "cameron"]
+    formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suita", "care", "cameron"]
 
     root = tk.Tk()
     root.title("Cameroon")
