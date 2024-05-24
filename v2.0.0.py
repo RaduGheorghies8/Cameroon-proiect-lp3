@@ -2,42 +2,56 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
+# se introduc bibliotecile necesare
+
 def aruncare_zaruri():
     return [random.randint(1, 6) for _ in range(6)]
+
+# definirea functiei pentru aruncarea zarurilor care returneaza 6 numere aleatorii unul pt fiecare zar
 
 def calculeaza_punctaj(zaruri, formatie):
     if formatie in ["1", "2", "3", "4", "5", "6"]:
         return sum(d for d in zaruri if d == int(formatie))
+        # verifica valoarea zarului in intervalul 1-6 si da suma valorilor din zaruri
     elif formatie == "mici":
         return sum(d for d in zaruri if d <= 3)
+        # suma doar pt cele mai mici decat 3
     elif formatie == "mari":
         return sum(d for d in zaruri if d >= 4)
+        # suma mai mari decat 4
     elif formatie == "pare":
         return sum(d for d in zaruri if d % 2 == 0)
+        #pt pare
     elif formatie == "impare":
         return sum(d for d in zaruri if d % 2 != 0)
+        #pt impare
     elif formatie == "duble":
         for i in range(1, 7):
             if zaruri.count(i) >= 2:
                 return 3 * i
         return 0
+        #varifica daca un nr apare de 2 ori in interval si ii retuneaza valoare triplata
     elif formatie == "triple":
         for i in range(1, 7):
             if zaruri.count(i) >= 3:
                 return 2 * 3 * i
         return 0
+        # same dar aici verifica daca apare de 3 ori
     elif formatie == "suita":
         if sorted(zaruri) == [1, 2, 3, 4, 5, 6]:
             return 20
         return 0
+        #daca cele 6 zaaruri pot forma numerele de al 1 la 6 si automat da 20 de puncte
     elif formatie == "care":
         if zaruri.count(6) >= 4:
             return sum(zaruri)
         return 0
+        #daca 6 apare de min 4 ori retuneaza suma acelor zaruri 
     elif formatie == "cameron":
         if zaruri == [4, 6, 4, 6, 4, 6]:
             return 36
         return 0
+        #doar daca sunt in aceasta formatie
 
 def arunca_zaruri_si_calculeaza():
     global punctaj_total
