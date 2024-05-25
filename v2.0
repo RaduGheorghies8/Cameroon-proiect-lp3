@@ -1,42 +1,42 @@
 import random  //Importam functia random pentru a genera numere aleatoare zarului
-import tkinter as tk  
-from tkinter import messagebox
+import tkinter as tk   // Aceasta linie importa biblioteca tkinter si o denumeste tk pentru interfata grafica
+from tkinter import messagebox   // importam messagebox pentru a avea o fereastra ca si interfata grafica unde ne sunt afisate rezultatele
 def aruncare_zaruri():   //functia pentru zaruri
     return [random.randint(1, 6) for _ in range(6)]   //rezultatul functie pentru zaruri zu rezultate aleatoare
 
 def calculeaza_punctaj(zaruri, formatie):   //functie pentru calcularea punctajului
-    if formatie in ["1", "2", "3", "4", "5", "6"]:   // verificam continutul formatiei
-        return sum(d for d in zaruri if d == int(formatie))  // se returneaza suma 
+    if formatie in ["1", "2", "3", "4", "5", "6"]:   // verificam continutul formatiei(daca acesta se afla in lista data)
+        return sum(d for d in zaruri if d == int(formatie))  // se returneaza suma anumitor elemente, daca acestea formeaza 
     elif formatie == "mici":   // verificam daca este o formatie de numere mici
-        return sum(d for d in zaruri if d <= 3)
+        return sum(d for d in zaruri if d <= 3)   // calculeaza suma anumitor elemente din lista zaruri, mai exact a elementelor mai mici decat 3
     elif formatie == "mari":   // verificam daca este o formatie de numere mari
-        return sum(d for d in zaruri if d >= 4)  
+        return sum(d for d in zaruri if d >= 4)   // returneaza suma anumitor elemente din lista, mai exact a elementelor cu valoare mai mare sau egala cu 4
     elif formatie == "pare":    //verificam daca este o formatie de numere pare
-        return sum(d for d in zaruri if d % 2 == 0)
+        return sum(d for d in zaruri if d % 2 == 0)   // returneaza suma elementelor pare din lista zaruri
     elif formatie == "impare":   //verificam daca este o formatie de numere impare
-        return sum(d for d in zaruri if d % 2 != 0)
+        return sum(d for d in zaruri if d % 2 != 0)   // returneaza suma elementelor impare din lista zaruri
     elif formatie == "duble":   //verificam daca este o formatie de numere duble
         for i in range(1, 7):    //parcurgem o instructiune repetitiva for 
-            if zaruri.count(i) >= 2:   // 
-                return 3 * i
-        return 0
+            if zaruri.count(i) >= 2:   // aceasta linie verifica daca variabila i apare de cel putin 2 ori in lista
+                return 3 * i   // daca variabila apare de mai mult de doua ori, se va returna valoarea 3*i
+        return 0   // daca variabila apare o singura data, se va returna 0, aceasta linie indicand ca nu exista duble in  formatie
     elif formatie == "triple":   // verificam daca formatia este de triple
-        for i in range(1, 7):   //parcurgem o instructiune repetitiva for
-            if zaruri.count(i) >= 3:   
-                return 2 * 3 * i
-        return 0
-    elif formatie == "suita":
-        if sorted(zaruri) == [1, 2, 3, 4, 5, 6]:
-            return 20
-        return 0
-    elif formatie == "care":
-        if zaruri.count(6) >= 4:
-            return sum(zaruri)
-        return 0
-    elif formatie == "cameron":
-        if zaruri == [4, 6, 4, 6, 4, 6]:
-            return 36
-        return 0
+        for i in range(1, 7):   //parcurgem o instructiune repetitiva for de la 1 pana la 6 inclusiv
+            if zaruri.count(i) >= 3:   //verificam daca variabila i apare de cel putin 2 ori in lista
+                return 2 * 3 * i   // daca apare de cel putin doua ori atunci se va returna 6*i
+        return 0   // daca variabila nu apare de 3 ori atunci ne sugereaza faptul ca nu avem o tripla in formatie
+    elif formatie == "suita":   // cu ajutorul unei instructiuni elif se verifica daca formatia este suita
+        if sorted(zaruri) == [1, 2, 3, 4, 5, 6]:  // aceasta linie verifica daca este formata o suita completa(de la 1 pana la 6 fara sa se repete)
+            return 20   //daca conditia este adevarata, se va returna un punctajul 20
+        return 0  // daca zarurile nu formeaza o suita completa se va returna punctajul 0
+    elif formatie == "care":   // verificam daca fomatia nu este de tipul care
+        if zaruri.count(6) >= 4:   // se verifica daca nu avem 4 valori dupa ce s a aruncat zarul egale cu 6
+            return sum(zaruri)   // daca exista cel putin 4 valori egale cu 6 se returneaza suma zarurilor
+        return 0   // daca avem mai putin de 4 valori egale cu 6 se returneaza 0
+    elif formatie == "cameron":   // se verifica daca formatia este "cameron"
+        if zaruri == [4, 6, 4, 6, 4, 6]:   // daca avem exact aceasta lista de zaruri atunci avem o formatie cameron
+            return 36   // se returneaza un punctaj de 36 de puncte
+        return 0   // daca nu avem exact lista din instructiunea if de mai sus, se va returna 0
 
 def main():   //definim functia main
     nume_jucator = input("Introduceți numele jucatorului: ")   //citim de la tastatura numele jucatorului
@@ -51,71 +51,71 @@ def main():   //definim functia main
         formatie_aleasa = input("Alegeți o formație disponibila sau renunțați (scrieți 'renunță'): ").lower()  // declaram formatia dorita sau putem renunta la joc
         if formatie_aleasa == "renunță":   // daca formatia aleasa este "renunta" atunci jocul se va termina
             print("Ați renunțat la această formație.")  // In acest caz se afiseaza in consola mesajul din interiorul printului
-            punctaj_total -= 3
-        elif formatie_aleasa in formatii_disponibile:
-            punctaj_formatie = calculeaza_punctaj(zaruri, formatie_aleasa)
-            print(f"Punctajul pentru formația {formatie_aleasa} este: {punctaj_formatie}")
-            punctaj_total += punctaj_formatie
-            formatii_realizate.append(formatie_aleasa)
-            formatii_disponibile.remove(formatie_aleasa)
-        else:
-            print("Formație invalidă!")
-    if len(formatii_realizate) == 15:
-        punctaj_total += 20
-        print("Felicitări, ați completat toate formațiile și ați primit un bonus de 20 de puncte!")
+            punctaj_total -= 3   // se scad 3 puncte din punctajul total in urma deciziei de a renunta la joc
+        elif formatie_aleasa in formatii_disponibile:   // se verifica daca formatia aleasa de jucator se afla in cele disponibile enumerate
+            punctaj_formatie = calculeaza_punctaj(zaruri, formatie_aleasa)   // se calculeaza punctajul formatiei care primeste ca parametrii lista de zaruri si formatia
+            print(f"Punctajul pentru formația {formatie_aleasa} este: {punctaj_formatie}")   // se afiseaza punctajul obtinut pentru formatia aleasa
+            punctaj_total += punctaj_formatie   // se adauga acest punctaj la punctajul total al jucatorului
+            formatii_realizate.append(formatie_aleasa)  // adauga formatia aleasa de jucator in lista de formatii realizate
+            formatii_disponibile.remove(formatie_aleasa)  // se sterge automat din lista de formatii disponibile formatia aleasa de jucator
+        else:   
+            print("Formație invalidă!")   // daca formatia nu se afla intre formatiile disponibile se va afisa mesajul din interiorul printului
+    if len(formatii_realizate) == 15:  // daca jucatorul a realizat toate cele 15 formatii
+        punctaj_total += 20   // se mai adauga 20 de puncte la punctajul total
+        print("Felicitări, ați completat toate formațiile și ați primit un bonus de 20 de puncte!") //se afiseaza urmatorul mesaj in consola daca este indeplinita conditia
 
-    print("Jocul s-a încheiat. Punctaj total:", punctaj_total)
+    print("Jocul s-a încheiat. Punctaj total:", punctaj_total)  // Sfarsitul jocului si afisarea punctajului total
 
-def arunca_zaruri_si_calculeaza():
-    global punctaj_total
-    zaruri = aruncare_zaruri()
-    messagebox.showinfo("Zaruri aruncate", f"Zarurile aruncate sunt: {zaruri}")
-    formatie_aleasa = input_box.get().lower()
-    if formatie_aleasa == "renunță":
-        messagebox.showinfo("Renunțare", "Ați renunțat la această formație.")
-        punctaj_total -= 3
-    elif formatie_aleasa in formatii_disponibile:
-        punctaj_formatie = calculeaza_punctaj(zaruri, formatie_aleasa)
+def arunca_zaruri_si_calculeaza():   // se defineste o functie pentru aruncarea si calculul zarurilor
+    global punctaj_total   // se declara parametrul global punctaj_total
+    zaruri = aruncare_zaruri()   // se apeleaza functia creata aruncare_zaruri
+    messagebox.showinfo("Zaruri aruncate", f"Zarurile aruncate sunt: {zaruri}")  // Afiseaza intr-o fereasta Mesajul si continutul zarurilor
+    formatie_aleasa = input_box.get().lower()  // citeste de la tastatura textul introdus de utilizator si in converteste in litere mici pentru a fi mai usor
+    if formatie_aleasa == "renunță":  // daca utilizatorul tasteaza mesajul renunta
+        messagebox.showinfo("Renunțare", "Ați renunțat la această formație.")  // in fereastra se va afisa mesajul din interiorul printului
+        punctaj_total -= 3  // se scad 3 puncte din punctajul total ca penalizare
+    elif formatie_aleasa in formatii_disponibile:  // daca formatia aleasa se afla in lista de formatii disponibile
+        punctaj_formatie = calculeaza_punctaj(zaruri, formatie_aleasa)   // se calculeaza punctajul formatiei care primeste ca parametrii lista de zaruri si formatia
         messagebox.showinfo("Punctaj", f"Punctajul pentru formația {formatie_aleasa} este: {punctaj_formatie}")
         punctaj_total += punctaj_formatie
         formatii_realizate.append(formatie_aleasa)
         formatii_disponibile.remove(formatie_aleasa)
     else:
         messagebox.showinfo("Formație invalidă", "Formație invalidă!")
-    input_box.delete(0, tk.END)
-    if len(formatii_realizate) == 15:
+    input_box.delete(0, tk.END)   //sterge continutul pentru a putea tasta alt camp de date din nou
+    if len(formatii_realizate) == 15:  
         punctaj_total += 20
         messagebox.showinfo("Felicitări!", "Ați completat toate formațiile și ați primit un bonus de 20 de puncte!")
-    punctaj_label.config(text=f"Punctaj total: {punctaj_total}")
+    punctaj_label.config(text=f"Punctaj total: {punctaj_total}")  //actualizeaza textul etichetei pentru a afisa noul punctaj total
 
-def start_game():
-    global punctaj_total
-    global formatii_realizate
-    global formatii_disponibile
-    punctaj_total = 0
-    formatii_realizate = []
-    formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suită", "caré", "cameron"]
+def start_game():   // se creeaza o functie de incepere a jocului
+    global punctaj_total   //se declara parametrul global
+    global formatii_realizate   //se declara parametrul global
+    global formatii_disponibile   //se declara parametrul global
+    punctaj_total = 0   // se initiaza parametrul pentru punctajul total cu 0
+    formatii_realizate = []   // se initiaza o lista goala pentru introducerea formatiilor realizate pe parcursul jocului
+    formatii_disponibile = ["1", "2", "3", "4", "5", "6", "mici", "mari", "pare", "impare", "duble", "triple", "suită", "caré", "cameron"]  //lista de formatii
 
-    root = tk.Tk()
-    root.title("Joc cu zaruri")
+    root = tk.Tk()   // creeaza fereasta principala pentru interfata grafica
+    root.title("Joc cu zaruri")   // se seteaza titlul Joc de zaruri
 
-    input_frame = tk.Frame(root)
-    input_frame.pack(pady=10)
+    input_frame = tk.Frame(root)   //creeaza un cadru frame acesta continand elementele de intrare
+    input_frame.pack(pady=10)   // adauga un padding vertical de 10 pixeli
 
-    input_label = tk.Label(input_frame, text="Alegeți o formă disponibilă sau renunțați:")
-    input_label.pack(side=tk.LEFT)
+    input_label = tk.Label(input_frame, text="Alegeți o formă disponibilă sau renunțați:")   //creeaza o eticheta label cu urmatorul text
+    input_label.pack(side=tk.LEFT)  //afiseaza eticheta input_label aliniata la stanga
 
-    global input_box
+    global input_box   // declara variabila input_box ca fiind globala pentru a permite folosirea sa in alte functii
     input_box = tk.Entry(input_frame)
     input_box.pack(side=tk.LEFT)
 
     arunca_button = tk.Button(root, text="Aruncă zarurile și calculează", command=arunca_zaruri_si_calculeaza)
     arunca_button.pack(pady=5)
 
-    global punctaj_label
+    global punctaj_label   //declara variabila punctaj_label ca fiind globala pentru a permite folosirea sa in alte functii
     punctaj_label = tk.Label(root, text=f"Punctaj total: {punctaj_total}")
     punctaj_label.pack()
     root.mainloop()
 
-if __name__ == "__main__":
-    start_game()
+if __name__ == "__main__":  //verifica daca fisierul este rulat direct
+    start_game()   //apeleaza functia start_game care contine interfata grafica si variabilele globale
