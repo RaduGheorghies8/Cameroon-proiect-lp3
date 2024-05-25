@@ -1,4 +1,4 @@
-import random
+import random   //Importam functia random pentru a genera numere aleatoare zarului
 import tkinter as tk
 from tkinter import messagebox
 
