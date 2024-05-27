@@ -59,7 +59,7 @@ def arunca_zaruri_si_calculeaza():
     zaruri = aruncare_zaruri()  #variabila zaruri apeleaza functia aruncare zaruri
     messagebox.showinfo("Zaruri aruncate", f"Zarurile aruncate sunt: {zaruri}")  #se afiseaza in fereastra creeata un mesaj cu zarurile aruncate
     formatie_aleasa = input_box.get().lower()  #se tasteaza formatia aleasa si se converteste in litere mici 
-    if formatie_aleasa == "renunță":  #Daca jucatorul a ales sa renunte
+    if formatie_aleasa == "renunta":  #Daca jucatorul a ales sa renunte
         messagebox.showinfo("Renunțare", "Ați renunțat la această formație.")  #se va afisa in fereastra mesajul din interiorul printului
         punctaj_total -= 3  #se scad 3 puncte din punctajul total
     elif formatie_aleasa in formatii_disponibile:  #daca formatia aleasa se afla in lista de formatii disponibile
