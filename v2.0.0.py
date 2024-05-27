@@ -112,27 +112,27 @@ def start_game():
     label_bg_color = bg_color
 
     title_label = tk.Label(root, text="Cameroon", font=title_font, fg=title_color, bg=bg_color)
-    title_label.pack(pady=20)
+    title_label.pack(pady=20)  #crearea titlului cu numele dat si specificatii legate de font si de culorile textului si al fundalului.
 
-    input_frame = tk.Frame(root, bg=bg_color)
-    input_frame.pack(pady=10)
+    input_frame = tk.Frame(root, bg=bg_color)  #creează un cadru pentru a introduce elementele de intrare
+    input_frame.pack(pady=10)   #
 
     input_label = tk.Label(input_frame, text="Alegeți o formă disponibilă sau renunțați:", font=label_font, bg=label_bg_color)
-    input_label.pack(side=tk.LEFT, padx=5)
+    input_label.pack(side=tk.LEFT, padx=5)  # Adugarea etichetei din interiorul printului cu culoarea data si aliniata la stanga, orizontal, cu o dimensiune de 5 pixeli
 
     input_box = tk.Entry(input_frame, bg=input_bg_color)
-    input_box.pack(side=tk.LEFT)
+    input_box.pack(side=tk.LEFT)  #intrare cu ajutorul careia utilizatorul poate tasta in feresta grafica text, alinierea se face spre stanga
 
     arunca_button = tk.Button(root, text="Aruncă zarurile și calculează", command=arunca_zaruri_si_calculeaza, bg=button_bg_color, fg=button_fg_color, font=button_font)
-    arunca_button.pack(pady=10)
+    arunca_button.pack(pady=10)  #se creeaza butonul cu ajutorul caruia vom afla punctajul in momentul cand acesta este apasat
 
     punctaj_label = tk.Label(root, text=f"Punctaj total: {punctaj_total}", font=label_font, bg=label_bg_color)
-    punctaj_label.pack(pady=5)
+    punctaj_label.pack(pady=5)  #se afiseaza punctajul total, si sunt specificate fontul si culoarea textului, la o dimensiune de 5 pixeli
 
     formatii_label = tk.Label(root, text="Formații realizate: ", font=label_font, bg=label_bg_color)
-    formatii_label.pack(pady=5)
+    formatii_label.pack(pady=5)  #se afiseaza formatiile realizate succesiv de jucator 
 
-    root.mainloop()
+    root.mainloop()  #instructiunea pentru a creea o bucla in interfata grafica pentru ca aceasta sa ramana deschisa pana la inchiderea de catre utilizator
 
 if __name__ == "__main__":  #verifica daca fisierul este rulat direct
     start_game()   #apeleaza functia start_game care contine interfata grafica si variabilele globale
