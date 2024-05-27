@@ -75,7 +75,7 @@ def arunca_zaruri_si_calculeaza():
         punctaj_total += 20  #se mai adauga 20 de puncte la punctajul total
         messagebox.showinfo("Felicitări!", "Ați completat toate formațiile și ați primit un bonus de 20 de puncte!")#se afiseaza urmatorul mesaj in consola daca este indeplinita conditia
     punctaj_label.config(text=f"Punctaj total: {punctaj_total}")  #actualizeaza textul etichetei pentru a afisa noul punctaj total
-    formatii_label.config(text=f"Formații realizate: {', '.join(formatii_realizate)}")
+    formatii_label.config(text=f"Formații realizate: {', '.join(formatii_realizate)}")  #actualizeaza lista de formatii realizate din interfata grafica
 
 def start_game():
     global punctaj_total
@@ -104,11 +104,11 @@ def start_game():
     button_font = ("Helvetica", 12, "bold")
 
     # Culori
-    title_color = "#283593"
+    title_color = "#283593"  #seteaza culoarea pentru titlu
     bg_color = "#fff176"  # Fundal galben
-    input_bg_color = "#fff9c4"
-    button_bg_color = "#f57f17"
-    button_fg_color = "white"
+    input_bg_color = "#fff9c4"  #seteaza culoarea de fundal pentru caseta de introducere
+    button_bg_color = "#f57f17" #seteaza culoarea de fundal pentru buton
+    button_fg_color = "white"  #
     label_bg_color = bg_color
 
     title_label = tk.Label(root, text="Cameroon", font=title_font, fg=title_color, bg=bg_color)
