@@ -179,7 +179,7 @@ def start_game():
     root.mainloop()
 
 
-def main_menu(): #facem aceasta functie pentru a avea acees la doua campuri de introducere a jucatorilo
+def main_menu(): #facem aceasta functie pentru a avea acees la doua campuri de introducere a jucatorilor
     global root  #variabila globala pentru usurinta de a fi folosita in alte functii
     root = tk.Tk() #creeaza fereastra interfetei cu ajutorul Tkinter
     root.title("Cameroon - Start") #seteaza titlul ferestrei de interfata
@@ -220,14 +220,14 @@ def main_menu(): #facem aceasta functie pentru a avea acees la doua campuri de i
     name_entry2.pack(pady=5)
     # creeaza caseta pentru a introduce numele celui de al doilea jucator
 
-    start_button = tk.Button(root, text="Start joc", command=go_to_game_screen, bg=button_bg_color, fg=button_fg_color,
+    start_button = tk.Button(root, text="Start joc", command=interfata_principala, bg=button_bg_color, fg=button_fg_color,
                              font=button_font)
     start_button.pack(pady=20)#creem un buton care atunci cand este apasat va apela functia pentru introducere numelor celor doi jucatori
 
     root.mainloop()#bucla interfetei care permite interactiunea si afisarea continutului acesteia
 
 
-def go_to_game_screen():#definirea functie care este apelata atunci cand utilizatorul apasa butonul
+def interfata_principala():#definirea functie care este apelata atunci cand utilizatorul apasa butonul
     global nume_jucator1
     global nume_jucator2
     nume_jucator1 = name_entry1.get() #se apeleaza parametrii globali din functia de mai sus si se paseaza numele
