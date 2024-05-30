@@ -232,7 +232,7 @@ def interfata_principala():#definirea functie care este apelata atunci cand util
     global nume_jucator2
     nume_jucator1 = name_entry1.get() #se apeleaza parametrii globali din functia de mai sus si se paseaza numele
     nume_jucator2 = name_entry2.get()
-    if nume_jucator1 and nume_jucator2: #daca numele sunt valide atunci meniul principal din interfata dispare si se va incepe jocul
+    if nume_jucator1 and nume_jucator2: #daca numele sunt introduse atunci meniul principal din interfata dispare si se va incepe jocul
         root.destroy()
         start_game()
     else:
